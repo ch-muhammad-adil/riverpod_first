@@ -2,14 +2,26 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../model/counter.dart';
 
-final counterProvider = StateNotifierProvider<CounterViewModel, Counter>((ref) {
+final counterProvider =
+    StateNotifierProvider<CounterViewModel, CounterState>((ref) {
   return CounterViewModel();
 });
 
-class CounterViewModel extends StateNotifier<Counter> {
-  CounterViewModel() : super(Counter(value: 0));
+class CounterState {
+  final Counter counter;
+  final bool isIncrementing;
 
-  void increment() => state = Counter(value: state.value! + 1);
+  CounterState(this.counter, {this.isIncrementing = false});
+}
 
-  void decrement() => state = Counter(value: state.value! - 1);
+class CounterViewModel extends StateNotifier<CounterState> {
+  CounterViewModel() : super(CounterState(Counter(value: 0)));
+
+  void increment() =>
+      state = CounterState(Counter(value: state.counter.value! + 1),
+          isIncrementing: true);
+
+  void decrement() =>
+      state = CounterState(Counter(value: state.counter.value! - 1),
+          isIncrementing: false);
 }
