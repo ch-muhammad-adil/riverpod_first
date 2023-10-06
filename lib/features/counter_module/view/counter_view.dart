@@ -6,8 +6,8 @@ import 'package:riverpod_first/main.dart';
 
 import '../view_model/counter_view_model.dart';
 
-class CouncterVie extends StatefulHookConsumerWidget {
-  const CouncterVie({super.key});
+class CouncterView extends StatefulHookConsumerWidget {
+  const CouncterView({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() {
@@ -15,7 +15,7 @@ class CouncterVie extends StatefulHookConsumerWidget {
   }
 }
 
-class _CounterTextState extends ConsumerState<CouncterVie> {
+class _CounterTextState extends ConsumerState<CouncterView> {
   @override
   Widget build(BuildContext context) {
     final counter = ref.watch(counterProvider);
@@ -24,7 +24,7 @@ class _CounterTextState extends ConsumerState<CouncterVie> {
       width: 200,
       color: Colors.red,
       child:
-          Text(counter.value.toString(), style: const TextStyle(fontSize: 30)),
+          Center(child: Text(counter.value.toString(), style: const TextStyle(fontSize: 30))),
     );
   }
 }
