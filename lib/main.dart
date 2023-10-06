@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod_first/counter_text.dart';
+
+import 'features/counter_module/view/counter_view.dart';
+import 'features/counter_module/view_model/counter_view_model.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -28,23 +30,6 @@ class MyApp extends HookConsumerWidget {
   }
 }
 
-final counterProvider = StateNotifierProvider<Counter, CounterValue>((ref) {
-  return Counter();
-});
-
-class Counter extends StateNotifier<CounterValue> {
-  Counter() : super(CounterValue(0));
-
-  void increment() => state = CounterValue(state.value + 1);
-
-  void decrement() => state = CounterValue(state.value - 1);
-}
-
-class CounterValue {
-  const CounterValue(this.value);
-
-  final int value;
-}
 
 class MyHomePage extends ConsumerWidget {
   const MyHomePage({super.key, required this.title});
@@ -60,20 +45,14 @@ class MyHomePage extends ConsumerWidget {
       ),
       body: Consumer(
         builder: (context, ref, _) {
-          final counterState = ref.watch(counterProvider);
-          ref.listen(counterProvider, (previous, next) {
-            print(previous!.value.toString());
-            print(next.value);
-          });
-          return Center(
+          return const Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text(
+                Text(
                   'You have pushed the button this many times:',
                 ),
-                const CounterText(),
-                Text(counterState.value.toString()),
+                CouncterVie(),
               ],
             ),
           );
