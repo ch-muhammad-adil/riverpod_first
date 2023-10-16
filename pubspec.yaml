@@ -32,11 +32,16 @@ dependencies:
     sdk: flutter
 
   flutter_hooks: ^0.18.0
+  freezed: ^2.4.5
+  freezed_annotation: ^2.4.1
   hooks_riverpod: ^2.3.7
+  json_annotation: ^4.8.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: ^2.3.2 #"flutter packages pub run build_runner build"  is used to apply json_serializable package on models
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -44,6 +49,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  json_serializable: ^6.7.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
