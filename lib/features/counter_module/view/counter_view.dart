@@ -17,14 +17,24 @@ class CouncterView extends StatefulHookConsumerWidget {
 
 class _CounterTextState extends ConsumerState<CouncterView> {
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback(
+        (timeStamp) => ref.read(counterProvider.notifier).getCounterFromAPI());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final counterState = ref.watch(counterProvider);
     return Container(
       height: 200,
       width: 200,
-      color: counterState.isIncrementing?Colors.red:Colors.blue,
+      color: counterState.isIncrementing ? Colors.red : Colors.blue,
       child: Center(
-          child: Text(counterState.counter.value.toString(),
+          child: Text(
+              counterState.isLoading
+                  ? 10.toString()
+                  : counterState.counter.value.toString(),
               style: const TextStyle(fontSize: 30))),
     );
   }
