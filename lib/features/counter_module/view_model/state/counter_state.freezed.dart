@@ -18,7 +18,6 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CounterState {
   Counter get counter => throw _privateConstructorUsedError;
   bool get isIncrementing => throw _privateConstructorUsedError;
-  bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CounterStateCopyWith<CounterState> get copyWith =>
@@ -31,7 +30,7 @@ abstract class $CounterStateCopyWith<$Res> {
           CounterState value, $Res Function(CounterState) then) =
       _$CounterStateCopyWithImpl<$Res, CounterState>;
   @useResult
-  $Res call({Counter counter, bool isIncrementing, bool isLoading});
+  $Res call({Counter counter, bool isIncrementing});
 }
 
 /// @nodoc
@@ -49,7 +48,6 @@ class _$CounterStateCopyWithImpl<$Res, $Val extends CounterState>
   $Res call({
     Object? counter = null,
     Object? isIncrementing = null,
-    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
       counter: null == counter
@@ -59,10 +57,6 @@ class _$CounterStateCopyWithImpl<$Res, $Val extends CounterState>
       isIncrementing: null == isIncrementing
           ? _value.isIncrementing
           : isIncrementing // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -76,7 +70,7 @@ abstract class _$$CounterStateImplCopyWith<$Res>
       __$$CounterStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Counter counter, bool isIncrementing, bool isLoading});
+  $Res call({Counter counter, bool isIncrementing});
 }
 
 /// @nodoc
@@ -92,7 +86,6 @@ class __$$CounterStateImplCopyWithImpl<$Res>
   $Res call({
     Object? counter = null,
     Object? isIncrementing = null,
-    Object? isLoading = null,
   }) {
     return _then(_$CounterStateImpl(
       null == counter
@@ -103,10 +96,6 @@ class __$$CounterStateImplCopyWithImpl<$Res>
           ? _value.isIncrementing
           : isIncrementing // ignore: cast_nullable_to_non_nullable
               as bool,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -114,21 +103,17 @@ class __$$CounterStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CounterStateImpl implements _CounterState {
-  _$CounterStateImpl(this.counter,
-      {this.isIncrementing = false, this.isLoading = false});
+  _$CounterStateImpl(this.counter, {this.isIncrementing = false});
 
   @override
   final Counter counter;
   @override
   @JsonKey()
   final bool isIncrementing;
-  @override
-  @JsonKey()
-  final bool isLoading;
 
   @override
   String toString() {
-    return 'CounterState(counter: $counter, isIncrementing: $isIncrementing, isLoading: $isLoading)';
+    return 'CounterState(counter: $counter, isIncrementing: $isIncrementing)';
   }
 
   @override
@@ -138,14 +123,11 @@ class _$CounterStateImpl implements _CounterState {
             other is _$CounterStateImpl &&
             (identical(other.counter, counter) || other.counter == counter) &&
             (identical(other.isIncrementing, isIncrementing) ||
-                other.isIncrementing == isIncrementing) &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isIncrementing == isIncrementing));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, counter, isIncrementing, isLoading);
+  int get hashCode => Object.hash(runtimeType, counter, isIncrementing);
 
   @JsonKey(ignore: true)
   @override
@@ -155,15 +137,13 @@ class _$CounterStateImpl implements _CounterState {
 }
 
 abstract class _CounterState implements CounterState {
-  factory _CounterState(final Counter counter,
-      {final bool isIncrementing, final bool isLoading}) = _$CounterStateImpl;
+  factory _CounterState(final Counter counter, {final bool isIncrementing}) =
+      _$CounterStateImpl;
 
   @override
   Counter get counter;
   @override
   bool get isIncrementing;
-  @override
-  bool get isLoading;
   @override
   @JsonKey(ignore: true)
   _$$CounterStateImplCopyWith<_$CounterStateImpl> get copyWith =>

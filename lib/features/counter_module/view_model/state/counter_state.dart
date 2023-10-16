@@ -7,5 +7,5 @@ part 'counter_state.freezed.dart';
 @freezed
 class CounterState with _$CounterState{
   factory CounterState(Counter counter,
-      {@Default(false) bool isIncrementing, @Default(false) bool isLoading}) = _CounterState;
+      {@Default(false) bool isIncrementing}) = _CounterState;
 }

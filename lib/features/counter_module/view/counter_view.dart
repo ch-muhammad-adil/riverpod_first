@@ -33,7 +33,7 @@ class _CounterTextState extends ConsumerState<CouncterView> {
           builder: (context) {
             return counterState.when(
                 data: (data) => Center(
-                    child: Text(data.counter.value.toString(),
+                    child: Text('${data.counter.value} ${data.isIncrementing}',
                         style: const TextStyle(fontSize: 30))),
                 error: (_, error) => const Center(child: Text('Error')),
                 loading: () => const Center(child: Text('Loading')));
