@@ -26,16 +26,18 @@ class _CounterTextState extends ConsumerState<CouncterView> {
   @override
   Widget build(BuildContext context) {
     final counterState = ref.watch(counterProvider);
-    return Container(
-      height: 200,
-      width: 200,
-      color: counterState.isIncrementing ? Colors.red : Colors.blue,
-      child: Center(
-          child: Text(
-              counterState.isLoading
-                  ? 10.toString()
-                  : counterState.counter.value.toString(),
-              style: const TextStyle(fontSize: 30))),
-    );
+    return SizedBox(
+        height: 200,
+        width: 200,
+        child: Builder(
+          builder: (context) {
+            return counterState.when(
+                data: (data) => Center(
+                    child: Text(data.counter.value.toString(),
+                        style: const TextStyle(fontSize: 30))),
+                error: (_, error) => const Center(child: Text('Error')),
+                loading: () => const Center(child: Text('Loading')));
+          },
+        ));
   }
 }

@@ -5,25 +5,25 @@ import 'package:riverpod_first/features/counter_module/view_model/state/counter_
 import '../model/counter.dart';
 
 final counterProvider =
-    StateNotifierProvider<CounterViewModel, CounterState>((ref) {
+    StateNotifierProvider<CounterViewModel, AsyncValue<CounterState>>((ref) {
   return CounterViewModel();
 });
 
+class CounterViewModel extends StateNotifier<AsyncValue<CounterState>> {
+  CounterViewModel() : super(AsyncValue.data(CounterState(Counter(value: 0))));
 
+  void increment() => state = AsyncValue.data(CounterState(
+      Counter(value: state.value!.counter.value! + 1),
+      isIncrementing: true));
 
-class CounterViewModel extends StateNotifier<CounterState> {
-  CounterViewModel() : super(CounterState(Counter(value: 0)));
-
-  void increment() =>
-      state = CounterState(Counter(value: state.counter.value! + 1),
-          isIncrementing: true);
-
-  void decrement() =>
-      state = CounterState(Counter(value: state.counter.value! - 1),
-          isIncrementing: false);
+  void decrement() => state = AsyncValue.data(CounterState(
+      Counter(value: state.value!.counter.value! - 1),
+      isIncrementing: false));
 
   void getCounterFromAPI() async {
-    state = CounterState(Counter(value: 5), isLoading: true);
-    state = CounterState(await CounterRepo().getCounterFromAPI());
+    state = const AsyncValue.loading();
+    await Future.delayed(const Duration(seconds: 2));
+    state = AsyncValue.error('Error message', StackTrace.current);
+    state = AsyncData(CounterState(await CounterRepo().getCounterFromAPI()));
   }
 }
